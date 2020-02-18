@@ -4,10 +4,6 @@ const Chapter = require("../../models/Chapter");
 
 const router = express.Router();
 
-router.get("/", (req, res) => res.json("chapter api route"));
-
-
-
 router.post("/", async (req, res) => {
   try {
     const newChapter = new Chapter({
@@ -23,13 +19,30 @@ router.post("/", async (req, res) => {
   }
 });
 
-//By class name and subject
-router.get("/:class/:subject/:name", async (req, res) => {
+//Get all chapters
+router.get("/", async (req, res) => {
+  try {
+    const chapters = await Chapter.find();
+    return res.json(chapters);
+  } catch (err) {
+    return res.json(err);
+  }
+});
+
+//By Id
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const chapter = await Chapter.findById(req.params.id);
+//     return res.json(chapter);
+//   } catch (err) {
+//     return res.json(err);
+//   }
+// });
+
+router.get("/fy", async (req, res) => {
   try {
     const chapter = await Chapter.find({
-      name: req.params.name,
-      subject: req.params.subject,
-      class: req.params.class
+      class: "F.Y"
     });
     return res.json(chapter);
   } catch (err) {
@@ -37,11 +50,11 @@ router.get("/:class/:subject/:name", async (req, res) => {
   }
 });
 
-//By class
-router.get("/:class", async (req, res) => {
+
+router.get("/sy", async (req, res) => {
   try {
     const chapter = await Chapter.find({
-      class: req.params.class
+      class: "S.Y"
     });
     return res.json(chapter);
   } catch (err) {
@@ -49,11 +62,11 @@ router.get("/:class", async (req, res) => {
   }
 });
 
-//By subject
-router.get("/:subject", async (req, res) => {
+
+router.get("/ty", async (req, res) => {
   try {
     const chapter = await Chapter.find({
-      subject: req.params.subject
+      class: "T.Y"
     });
     return res.json(chapter);
   } catch (err) {
@@ -61,15 +74,45 @@ router.get("/:subject", async (req, res) => {
   }
 });
 
-router.get("/:name", async (req, res) => {
-  try {
-    const chapter = await Chapter.find({
-      name: req.params.name
-    });
-    return res.json(chapter);
-  } catch (err) {
-    return res.json(err);
-  }
-});
+
+
+// //By class name and subject
+// router.get('/:class/:subject/:name', async (req, res) => {
+//   try {
+//     const chapter = await Chapter.find({
+//       name: req.params.name,
+//       subject: req.params.subject,
+//       class: req.params.class
+//     });
+//     return res.json(chapter);
+//   } catch (err) {
+//     return res.json(err);
+//   }
+// });
+
+// //By class
+// router.get('/:class', async (req, res) => {
+//   try {
+//     console.log(req.params);
+//     const chapter = await Chapter.find({
+//       class: req.params.class
+//     });
+//     return res.json(chapter);
+//   } catch (err) {
+//     return res.json(err);
+//   }
+// });
+
+// //By subject
+// router.get("/:subject", async (req, res) => {
+//   try {
+//     const chapter = await Chapter.find({
+//       subject: req.params.subject
+//     });
+//     return res.json(chapter);
+//   } catch (err) {
+//     return res.json(err);
+//   }
+// });
 
 module.exports = router;
