@@ -8,7 +8,8 @@ const connectDB = async () => {
     //mongodb://unigro:Unigro%40123@103.123.47.130:27017/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false
     //mongodb://103.123.47.130:27017/test-
     await mongoose.connect("mongodb+srv://gmlms:gmlms123@cluster0-m7ysv.mongodb.net/test?retryWrites=true&w=majority", {
-      useNewUrlParser: true,
+    //mongodb+srv://gmlms:gmlms123@cluster0-m7ysv.mongodb.net/test?retryWrites=true&w=majority  
+    useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
       useFindAndModify: false
