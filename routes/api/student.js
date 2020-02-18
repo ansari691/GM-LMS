@@ -5,10 +5,6 @@ const Student = require('../../models/Student');
 
 const router = express.Router();
 
-
-router.get('/', (req, res) => res.json('student api route'));
-
-
 var storage = multer.diskStorage({
   destination : (req, file, cb) => {
       cb(null, 'uploads');
@@ -43,6 +39,13 @@ router.post("/", async (req, res) => {
       return res.json(err);
     }
   });
+-
+
+  //get all students
+  router.get('/', (req, res) => {
+    const students = await Student.find();
+    return res.json(students);
+  })
 
 
   module.exports = router;

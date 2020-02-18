@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get("/", (req, res) => res.json("chapter api route"));
 
+
+
 router.post("/", async (req, res) => {
   try {
     const newChapter = new Chapter({
