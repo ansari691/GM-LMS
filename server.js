@@ -28,7 +28,7 @@ const connectDB = async () => {
 
 app.use(express.json());
 
-app.listen(5500 , () => console.log("server running"));
+app.listen(5000 , () => console.log("server running"));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
