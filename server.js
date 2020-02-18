@@ -5,10 +5,13 @@ const app = express();
 const connectDB = async () => {
   try {
     //mongodb://username:password@host:port/database
+    //mongodb://unigro:Unigro%40123@103.123.47.130:27017/test?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false
     //mongodb://unigro:Unigro%40123@103.123.47.130:27017/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false
     //mongodb://103.123.47.130:27017/test-
-    await mongoose.connect("mongodb+srv://gmlms:gmlms123@cluster0-m7ysv.mongodb.net/test?retryWrites=true&w=majority", {
-    //mongodb+srv://gmlms:gmlms123@cluster0-m7ysv.mongodb.net/test?retryWrites=true&w=majority  
+    //await mongoose.connect("mongodb+srv://gmlms:gmlms123@cluster0-m7ysv.mongodb.net/test?retryWrites=true&w=majority", {
+    await mongoose.connect("mongodb://unigro:Unigro%40123@103.123.47.130:27017/test?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false", {
+    //mongodb+srv://gmlms:gmlms123@cluster0-m7ysv.mongodb.net/test?retryWrites=true&w=majority
+    //mongodb://unigro:Unigro%40123@103.123.47.130:27017/test?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false  
     useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
