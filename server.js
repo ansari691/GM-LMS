@@ -27,6 +27,7 @@ const connectDB = async () => {
 
 
 app.use(express.json());
+app.use(express.static('uploads'));
 
 app.listen(5000 , () => console.log("server running"));
 

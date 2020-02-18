@@ -1,23 +1,61 @@
 const express = require("express");
+const multer = require("multer");
 
 const Chapter = require("../../models/Chapter");
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-  try {
-    const newChapter = new Chapter({
-      name: req.body.name,
-      subject: req.body.subject,
-      class: req.body.class
-    });
-    const chapter = await newChapter.save();
+// router.post("/", async (req, res) => {
+//   try {
+//     const newChapter = new Chapter({
+//       name: req.body.name,
+//       subject: req.body.subject,
+//       class: req.body.class
+//     });
+//     const chapter = await newChapter.save();
 
-    return res.json(chapter);
-  } catch (err) {
-    return res.json(err);
+//     return res.json(chapter);
+//   } catch (err) {
+//     return res.json(err);
+//   }
+// });
+
+
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "pdfs");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "_" + file.originalname);
   }
 });
+
+var upload = multer({
+  storage: storage
+}).single("pdf");
+
+//posting an ad
+router.post("/", upload, async (req, res) => {
+  console.log()
+  try {
+    const newChapter = new Chapter({
+      pdf : req.file.filename,
+      name: req.body.name,
+      class: req.body.class,
+      subject: req.body.subject  
+    });
+
+    const chapter = await newChapter.save();
+
+    console.log(chapter);
+    res.json(chapter);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("server error");
+  }
+});
+
+
 
 //Get all chapters
 router.get("/", async (req, res) => {

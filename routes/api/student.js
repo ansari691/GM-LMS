@@ -54,10 +54,10 @@ var upload = multer({
 
 //posting an ad
 router.post("/", upload, async (req, res) => {
-  console.log(req)
+  console.log()
   try {
     const newStudent = new Student({
-      imagePath : req.file.filename,
+      image : req.file.filename,
       name: req.body.name,
       rollNo: req.body.rollNo,
       class: req.body.class,
@@ -71,8 +71,9 @@ router.post("/", upload, async (req, res) => {
     console.log(student);
     res.json(student);
   } catch (err) {
-    console.log(req)
-    console.error(err.message);
+    console.log(req.file);
+    console.log(req.files);
+    console.error(err);
     res.status(500).send("server error");
   }
 });
