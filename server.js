@@ -30,17 +30,17 @@ app.use(express.json());
 
 app.listen(5000 , () => console.log("server running"));
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Request-With, Accept, Content-Type, Authorization, x-auth-token');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-
-  next();
-})
-
 app.get("/", (req, res) => {
   return res.send("home route");
 });
+
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Request-With, Accept, Content-Type, Authorization, x-auth-token');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+
+//   next();
+// })
 
 
 app.use('/api/student', require('./routes/api/student'));
