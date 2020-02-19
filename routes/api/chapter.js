@@ -55,7 +55,7 @@ router.get("/", async (req, res) => {
 router.get("/fy", async (req, res) => {
   try {
     const chapter = await Chapter.find({
-      class: "F.Y"
+      class: "fy"
     });
     return res.json(chapter);
   } catch (err) {
@@ -67,7 +67,7 @@ router.get("/fy", async (req, res) => {
 router.get("/sy", async (req, res) => {
   try {
     const chapter = await Chapter.find({
-      class: "S.Y"
+      class: "sy"
    
    });
     return res.json(chapter);
@@ -80,7 +80,7 @@ router.get("/sy", async (req, res) => {
 router.get("/ty", async (req, res) => {
   try {
     const chapter = await Chapter.find({
-      class: "T.Y"
+      class: "ty"
     });
     return res.json(chapter);
   } catch (err) {
