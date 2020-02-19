@@ -17,14 +17,14 @@ var storage = multer.diskStorage({
 
 var upload = multer({
   storage: storage
-}).single("pdf");
+}).array("pdf",10);
 
 //posting an ad
 router.post("/", upload, async (req, res) => {
   console.log()
   try {
     const newChapter = new Chapter({
-      pdf : req.file.filename,
+      pdf : req.files,
       name: req.body.name,
       class: req.body.class,
       subject: req.body.subject  
