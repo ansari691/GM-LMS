@@ -1,25 +1,10 @@
+
 const express = require("express");
 const multer = require("multer");
 
 const Chapter = require("../../models/Chapter");
 
 const router = express.Router();
-
-// router.post("/", async (req, res) => {
-//   try {
-//     const newChapter = new Chapter({
-//       name: req.body.name,
-//       subject: req.body.subject,
-//       class: req.body.class
-//     });
-//     const chapter = await newChapter.save();
-
-//     return res.json(chapter);
-//   } catch (err) {
-//     return res.json(err);
-//   }
-// });
-
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -67,16 +52,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-//By Id
-// router.get("/:id", async (req, res) => {
-//   try {
-//     const chapter = await Chapter.findById(req.params.id);
-//     return res.json(chapter);
-//   } catch (err) {
-//     return res.json(err);
-//   }
-// });
-
 router.get("/fy", async (req, res) => {
   try {
     const chapter = await Chapter.find({
@@ -93,7 +68,8 @@ router.get("/sy", async (req, res) => {
   try {
     const chapter = await Chapter.find({
       class: "S.Y"
-    });
+   
+   });
     return res.json(chapter);
   } catch (err) {
     return res.json(err);
@@ -111,46 +87,5 @@ router.get("/ty", async (req, res) => {
     return res.json(err);
   }
 });
-
-
-
-// //By class name and subject
-// router.get('/:class/:subject/:name', async (req, res) => {
-//   try {
-//     const chapter = await Chapter.find({
-//       name: req.params.name,
-//       subject: req.params.subject,
-//       class: req.params.class
-//     });
-//     return res.json(chapter);
-//   } catch (err) {
-//     return res.json(err);
-//   }
-// });
-
-// //By class
-// router.get('/:class', async (req, res) => {
-//   try {
-//     console.log(req.params);
-//     const chapter = await Chapter.find({
-//       class: req.params.class
-//     });
-//     return res.json(chapter);
-//   } catch (err) {
-//     return res.json(err);
-//   }
-// });
-
-// //By subject
-// router.get("/:subject", async (req, res) => {
-//   try {
-//     const chapter = await Chapter.find({
-//       subject: req.params.subject
-//     });
-//     return res.json(chapter);
-//   } catch (err) {
-//     return res.json(err);
-//   }
-// });
 
 module.exports = router;

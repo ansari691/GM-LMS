@@ -57,7 +57,7 @@ router.post("/", upload, async (req, res) => {
   console.log()
   try {
     const newStudent = new Student({
-      image : req.file.filename,
+      image : req.file.name,
       name: req.body.name,
       rollNo: req.body.rollNo,
       class: req.body.class,
