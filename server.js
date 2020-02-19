@@ -43,9 +43,10 @@ app.use((req, res, next) => {
   next();
 })
 
-
+app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/student', require('./routes/api/student'));
 app.use('/api/chapter', require('./routes/api/chapter'));
+
 
 
 connectDB();
