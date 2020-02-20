@@ -1,4 +1,3 @@
-
 const express = require("express");
 const multer = require("multer");
 
@@ -41,6 +40,14 @@ router.post("/", upload, async (req, res) => {
 });
 
 
+router.get("/id/:id", async (req, res) => {
+  try {
+    const student = await Chapter.findById(req.params.id);
+    res.json(student);
+  } catch (err) {
+    res.json(err);
+  }
+});
 
 //Get all chapters
 router.get("/", async (req, res) => {
