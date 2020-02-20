@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const StudentSchema = new mongoose.Schema({
-  image : { type : String },
+  image : { type : Object },
   name: { type: String, required: true },
   rollNo : { type : Number, required : true},
   class : {type : String, required : true},

@@ -1,5 +1,6 @@
 const express = require("express");
 const multer = require("multer");
+const fs = require("fs");
 
 const Chapter = require("../../models/Chapter");
 
@@ -16,17 +17,17 @@ var storage = multer.diskStorage({
 
 var upload = multer({
   storage: storage
-}).array("pdf",10);
+}).array("pdf", 10);
 
 //posting an ad
 router.post("/", upload, async (req, res) => {
-  console.log()
+  console.log();
   try {
     const newChapter = new Chapter({
-      pdf : req.files,
+      pdf: req.files,
       name: req.body.name,
       class: req.body.class,
-      subject: req.body.subject  
+      subject: req.body.subject
     });
 
     const chapter = await newChapter.save();
@@ -38,7 +39,6 @@ router.post("/", upload, async (req, res) => {
     res.status(500).send("server error");
   }
 });
-
 
 router.get("/id/:id", async (req, res) => {
   try {
@@ -70,19 +70,16 @@ router.get("/fy", async (req, res) => {
   }
 });
 
-
 router.get("/sy", async (req, res) => {
   try {
     const chapter = await Chapter.find({
       class: "sy"
-   
-   });
+    });
     return res.json(chapter);
   } catch (err) {
     return res.json(err);
   }
 });
-
 
 router.get("/ty", async (req, res) => {
   try {
@@ -92,6 +89,19 @@ router.get("/ty", async (req, res) => {
     return res.json(chapter);
   } catch (err) {
     return res.json(err);
+  }
+});
+
+router.delete("/id/:id", async (req, res) => {
+  try {
+    const chapter = await Chapter.findById(req.params.id);
+
+    chapter.pdf.map(x => fs.unlink(x.path, () => console.log(`${x.filename} - deleted`)));
+    
+    await chapter.remove();
+    res.json("pdf deleted successfully");
+  } catch (err) {
+    res.json(err);
   }
 });
 

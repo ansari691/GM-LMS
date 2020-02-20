@@ -1,5 +1,6 @@
 const express = require("express");
 const multer = require("multer");
+const fs = require("fs");
 
 const Student = require("../../models/Student");
 
@@ -57,7 +58,7 @@ router.post("/", upload, async (req, res) => {
   console.log()
   try {
     const newStudent = new Student({
-      image : req.file.filename,
+      image : req.file,
       name: req.body.name,
       rollNo: req.body.rollNo,
       class: req.body.class,
@@ -71,8 +72,6 @@ router.post("/", upload, async (req, res) => {
     console.log(student);
     res.json(student);
   } catch (err) {
-    console.log(req.file);
-    console.log(req.files);
     console.error(err);
     res.status(500).send("server error");
   }
@@ -100,6 +99,9 @@ router.get("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const student = await Student.findById(req.params.id);
+
+    fs.unlink(student.image.path, () => console.log(`${student.image.originalname} - deleted successfully`));
+
     await student.remove();
     return res.json("deleted successfully");
   } catch (err) {
